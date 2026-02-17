@@ -46,6 +46,12 @@
         <killbill-platform.version>0.40.13</killbill-platform.version>
     </properties>
     <dependencies>
+        <!-- Required by AppPrinterTest.java -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
@@ -67,9 +73,30 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- Required by Jooby Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>2.10.1</version>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-joda</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-afterburner</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>2.10.1</version>
         </dependency>
         <dependency>
             <groupId>com.github.spotbugs</groupId>
@@ -78,6 +105,22 @@
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+        <!-- Required by src/test/java/org/jooby/internal/RequestScopeTest.java, for ReCircularDependencyProxy -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ning</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>1.9.40</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.typesafe</groupId>
@@ -104,14 +147,30 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+        <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -123,21 +182,45 @@
             <artifactId>org.apache.felix.framework</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- Required by src/test/java/org/jooby/test/ServerFeature.java -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.5.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>3.6</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.joda</groupId>
             <artifactId>joda-money</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jooby</groupId>
-            <artifactId>jooby</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jooby</groupId>
-            <artifactId>jooby-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jooby</groupId>
-            <artifactId>jooby-servlet</artifactId>
+            <artifactId>funzy</artifactId>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
@@ -254,6 +337,37 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Needed by jooby internal class (RouteMetadata) -->
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>9.7.1</version>
+        </dependency>
+        <!-- Required by src/test/java/org/jooby/RequestLoggerTest.java -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-easymock</artifactId>
+            <version>1.7.4</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>cglib</groupId>
+                    <artifactId>cglib-nodep</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-core</artifactId>
+            <version>1.7.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>1.7.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
